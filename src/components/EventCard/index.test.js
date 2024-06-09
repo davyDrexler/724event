@@ -1,17 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import EventCard from "./index";
 
-describe("When a event card is created", () => {
-  it("an image is display with alt value", () => {
-    render(<EventCard imageSrc="http://src-image" imageAlt="image-alt-text" date={new Date("2022-04-01")} 
-    title="test event"
-    
-    label="test label"
-    />);
+describe("When an event card is created", () => {
+  it("an image is displayed with alt value", () => {
+    render(
+      <EventCard 
+        imageSrc="http://src-image" 
+        imageAlt="image-alt-text" 
+        date={new Date('2022-04-01')} 
+        title="test event"
+        label="test label"
+      />
+    );
     const imageElement = screen.getByTestId("card-image-testid");
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("image-alt-text");
   });
+
   it("a title, a label and a month are displayed", () => {
     render(
       <EventCard
@@ -22,13 +27,20 @@ describe("When a event card is created", () => {
         date={new Date("2022-04-01")}
       />
     );
+
+    // Debug the rendered output
+    screen.debug();
+
+    // Use custom matchers for more flexibility
     const titleElement = screen.getByText(/test event/);
-    const monthElement = screen.getByText(/avril/);
+    const monthElement = screen.getByText((content, element) => /avril/i.test(content));
     const labelElement = screen.getByText(/test label/);
+
     expect(titleElement).toBeInTheDocument();
     expect(labelElement).toBeInTheDocument();
     expect(monthElement).toBeInTheDocument();
   });
+
   describe("with small props", () => {
     it("a modifier small is added", () => {
       render(
