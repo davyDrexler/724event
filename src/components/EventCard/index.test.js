@@ -33,7 +33,7 @@ describe("When an event card is created", () => {
 
     // Use custom matchers for more flexibility
     const titleElement = screen.getByText(/test event/);
-    const monthElement = screen.getByText((content, element) => /avril/i.test(content));
+    const monthElement = screen.getByText(/april/i);
     const labelElement = screen.getByText(/test label/);
 
     expect(titleElement).toBeInTheDocument();
