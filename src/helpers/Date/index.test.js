@@ -1,6 +1,4 @@
-/**
- * 
- */
+import { getMonth } from './index.js'; 
 
 describe("Date helper", () => {
     describe("When getMonth is called", () => {
